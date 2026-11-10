@@ -71,7 +71,8 @@ export default function App() {
 
   // 1. Sync initial server mail configuration & email logs
   useEffect(() => {
-    fetch('/api/mail-config')
+    const controller = new AbortController();
+    fetch('/api/mail-config', { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (data?.config) {
@@ -81,9 +82,16 @@ export default function App() {
           setEmailLogs(data.logs);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err instanceof Error && err.name === 'AbortError') {
+          return;
+        }
         // Offline or dev fallback
       });
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   // 2. Listen to Firebase Auth state
