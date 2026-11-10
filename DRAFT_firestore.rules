@@ -1,0 +1,239 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Pillar 1: Global Default-Deny Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Core Primitives
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerifiedUser() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      return isVerifiedUser() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        request.auth.token.email == "goldencrafteu@gmail.com"
+      );
+    }
+
+    // Validation Blueprint: Vacancy
+    function isValidVacancy(data) {
+      return data.keys().hasAll([
+        'title', 'department', 'location', 'employmentType', 'level',
+        'salaryRange', 'summary', 'description', 'requirements',
+        'benefits', 'status', 'authorId', 'createdAt', 'updatedAt'
+      ]) &&
+      data.keys().hasOnly([
+        'title', 'department', 'location', 'employmentType', 'level',
+        'salaryRange', 'summary', 'description', 'requirements',
+        'benefits', 'status', 'authorId', 'createdAt', 'updatedAt'
+      ]) &&
+      data.title is string && data.title.size() >= 2 && data.title.size() <= 120 &&
+      data.department is string && data.department.size() >= 2 && data.department.size() <= 80 &&
+      data.location is string && data.location.size() >= 2 && data.location.size() <= 80 &&
+      data.employmentType is string && data.employmentType.size() <= 60 &&
+      data.employmentType in ['Fulltime (40 uur)', 'Parttime (32-40 uur)', 'BBL / Leerwerktraject', 'ZZP / Projectbasis'] &&
+      data.level is string && data.level.size() >= 2 && data.level.size() <= 60 &&
+      data.salaryRange is string && data.salaryRange.size() >= 2 && data.salaryRange.size() <= 80 &&
+      data.summary is string && data.summary.size() >= 10 && data.summary.size() <= 400 &&
+      data.description is string && data.description.size() >= 10 && data.description.size() <= 3000 &&
+      data.requirements is string && data.requirements.size() >= 5 && data.requirements.size() <= 1500 &&
+      data.benefits is string && data.benefits.size() >= 5 && data.benefits.size() <= 1500 &&
+      data.status is string && data.status.size() <= 20 && data.status in ['open', 'closed'] &&
+      data.authorId is string && data.authorId.size() >= 1 && data.authorId.size() <= 128 &&
+      data.createdAt is timestamp &&
+      data.updatedAt is timestamp;
+    }
+
+    // Validation Blueprint: JobApplication
+    function isValidJobApplication(data) {
+      return data.keys().hasAll([
+        'vacancyId', 'vacancyTitle', 'applicantName', 'applicantEmail',
+        'applicantPhone', 'motivation', 'cvFileName', 'cvMimeType',
+        'cvDataUrl', 'emailDispatched', 'status', 'createdAt'
+      ]) &&
+      data.keys().hasOnly([
+        'vacancyId', 'vacancyTitle', 'applicantName', 'applicantEmail',
+        'applicantPhone', 'motivation', 'cvFileName', 'cvMimeType',
+        'cvDataUrl', 'emailDispatched', 'status', 'createdAt'
+      ]) &&
+      data.vacancyId is string && data.vacancyId.size() >= 2 && data.vacancyId.size() <= 128 && data.vacancyId.matches('^[a-zA-Z0-9_\\-]+$') &&
+      data.vacancyTitle is string && data.vacancyTitle.size() >= 2 && data.vacancyTitle.size() <= 120 &&
+      data.applicantName is string && data.applicantName.size() >= 2 && data.applicantName.size() <= 120 &&
+      data.applicantEmail is string && data.applicantEmail.size() >= 5 && data.applicantEmail.size() <= 160 &&
+      data.applicantPhone is string && data.applicantPhone.size() >= 6 && data.applicantPhone.size() <= 40 &&
+      data.motivation is string && data.motivation.size() >= 5 && data.motivation.size() <= 3000 &&
+      data.cvFileName is string && data.cvFileName.size() >= 1 && data.cvFileName.size() <= 200 &&
+      data.cvMimeType is string && data.cvMimeType.size() >= 3 && data.cvMimeType.size() <= 100 &&
+      data.cvDataUrl is string && data.cvDataUrl.size() >= 5 && data.cvDataUrl.size() <= 750000 &&
+      data.emailDispatched is string && data.emailDispatched.size() <= 20 && data.emailDispatched in ['sent', 'queued', 'failed'] &&
+      data.status is string && data.status.size() <= 20 && data.status in ['new', 'reviewed', 'invited', 'archived'] &&
+      data.createdAt is timestamp;
+    }
+
+    // Validation Blueprint: ContactInquiry
+    function isValidContactInquiry(data) {
+      return data.keys().hasAll([
+        'name', 'company', 'email', 'phone', 'subject',
+        'message', 'emailDispatched', 'status', 'createdAt'
+      ]) &&
+      data.keys().hasOnly([
+        'name', 'company', 'email', 'phone', 'subject',
+        'message', 'emailDispatched', 'status', 'createdAt'
+      ]) &&
+      data.name is string && data.name.size() >= 2 && data.name.size() <= 120 &&
+      data.company is string && data.company.size() <= 120 &&
+      data.email is string && data.email.size() >= 5 && data.email.size() <= 160 &&
+      data.phone is string && data.phone.size() >= 6 && data.phone.size() <= 40 &&
+      data.subject is string && data.subject.size() >= 2 && data.subject.size() <= 120 &&
+      data.message is string && data.message.size() >= 10 && data.message.size() <= 3000 &&
+      data.emailDispatched is string && data.emailDispatched.size() <= 20 && data.emailDispatched in ['sent', 'queued', 'failed'] &&
+      data.status is string && data.status.size() <= 20 && data.status in ['new', 'handled'] &&
+      data.createdAt is timestamp;
+    }
+
+    // Validation Blueprint: MailConfig
+    function isValidMailConfig(data) {
+      return data.keys().hasAll([
+        'recipientEmail', 'ccEmail', 'senderName', 'smtpHost', 'smtpPort',
+        'smtpUser', 'smtpPass', 'forwardContacts', 'forwardApplications',
+        'autoReplyApplicant', 'updatedBy', 'updatedAt'
+      ]) &&
+      data.keys().hasOnly([
+        'recipientEmail', 'ccEmail', 'senderName', 'smtpHost', 'smtpPort',
+        'smtpUser', 'smtpPass', 'forwardContacts', 'forwardApplications',
+        'autoReplyApplicant', 'updatedBy', 'updatedAt'
+      ]) &&
+      data.recipientEmail is string && data.recipientEmail.size() >= 5 && data.recipientEmail.size() <= 160 &&
+      data.ccEmail is string && data.ccEmail.size() <= 160 &&
+      data.senderName is string && data.senderName.size() >= 2 && data.senderName.size() <= 120 &&
+      data.smtpHost is string && data.smtpHost.size() <= 160 &&
+      data.smtpPort is int && data.smtpPort >= 1 && data.smtpPort <= 65535 &&
+      data.smtpUser is string && data.smtpUser.size() <= 160 &&
+      data.smtpPass is string && data.smtpPass.size() <= 200 &&
+      data.forwardContacts is bool &&
+      data.forwardApplications is bool &&
+      data.autoReplyApplicant is bool &&
+      data.updatedBy is string && data.updatedBy.size() >= 1 && data.updatedBy.size() <= 128 &&
+      data.updatedAt is timestamp;
+    }
+
+    // Admins lookup collection
+    match /admins/{adminId} {
+      allow get: if isSignedIn() && isValidId(adminId) && request.auth.uid == adminId;
+      allow list, create, update, delete: if false;
+    }
+
+    // Collection: /vacancies/{vacancyId}
+    match /vacancies/{vacancyId} {
+      allow get: if isValidId(vacancyId) && (existing().status == 'open' || isAdmin());
+      allow list: if existing().status == 'open' || isAdmin();
+      allow create: if isVerifiedUser() &&
+        isValidId(vacancyId) &&
+        isValidVacancy(incoming()) &&
+        incoming().authorId == request.auth.uid &&
+        incoming().createdAt == request.time &&
+        incoming().updatedAt == request.time &&
+        isAdmin();
+      allow update: if isVerifiedUser() &&
+        isValidId(vacancyId) &&
+        isValidVacancy(incoming()) &&
+        incoming().authorId == existing().authorId &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().updatedAt == request.time &&
+        incoming().diff(existing()).affectedKeys().hasOnly([
+          'title', 'department', 'location', 'employmentType', 'level',
+          'salaryRange', 'summary', 'description', 'requirements',
+          'benefits', 'status', 'updatedAt'
+        ]) &&
+        isAdmin();
+      allow delete: if isVerifiedUser() && isValidId(vacancyId) && isAdmin();
+    }
+
+    // Collection: /applications/{applicationId} (Strict PII Isolation)
+    match /applications/{applicationId} {
+      allow get: if isValidId(applicationId) && isAdmin();
+      allow list: if isAdmin();
+      allow create: if isValidId(applicationId) &&
+        isValidJobApplication(incoming()) &&
+        incoming().status == 'new' &&
+        incoming().createdAt == request.time &&
+        (
+          incoming().vacancyId in ['open-sollicitatie', 'vac-kabels-01', 'vac-machinist-02', 'vac-uitvoerder-03', 'vac-straatmaker-04'] ||
+          exists(/databases/$(database)/documents/vacancies/$(incoming().vacancyId))
+        );
+      allow update: if isVerifiedUser() &&
+        isValidId(applicationId) &&
+        isValidJobApplication(incoming()) &&
+        incoming().vacancyId == existing().vacancyId &&
+        incoming().applicantEmail == existing().applicantEmail &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['status', 'emailDispatched']) &&
+        isAdmin();
+      allow delete: if isVerifiedUser() && isValidId(applicationId) && isAdmin();
+    }
+
+    // Collection: /inquiries/{inquiryId} (Strict PII Isolation)
+    match /inquiries/{inquiryId} {
+      allow get: if isValidId(inquiryId) && isAdmin();
+      allow list: if isAdmin();
+      allow create: if isValidId(inquiryId) &&
+        isValidContactInquiry(incoming()) &&
+        incoming().status == 'new' &&
+        incoming().createdAt == request.time;
+      allow update: if isVerifiedUser() &&
+        isValidId(inquiryId) &&
+        isValidContactInquiry(incoming()) &&
+        incoming().email == existing().email &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['status', 'emailDispatched']) &&
+        isAdmin();
+      allow delete: if isVerifiedUser() && isValidId(inquiryId) && isAdmin();
+    }
+
+    // Collection: /settings/{settingId} (Admin Mail Configuration)
+    match /settings/{settingId} {
+      allow get: if isValidId(settingId) && settingId == 'mailConfig' && isAdmin();
+      allow list: if false;
+      allow create: if isVerifiedUser() &&
+        isValidId(settingId) &&
+        settingId == 'mailConfig' &&
+        isValidMailConfig(incoming()) &&
+        incoming().updatedBy == request.auth.uid &&
+        incoming().updatedAt == request.time &&
+        isAdmin();
+      allow update: if isVerifiedUser() &&
+        isValidId(settingId) &&
+        settingId == 'mailConfig' &&
+        isValidMailConfig(incoming()) &&
+        incoming().updatedBy == request.auth.uid &&
+        incoming().updatedAt == request.time &&
+        incoming().diff(existing()).affectedKeys().hasOnly([
+          'recipientEmail', 'ccEmail', 'senderName', 'smtpHost', 'smtpPort',
+          'smtpUser', 'smtpPass', 'forwardContacts', 'forwardApplications',
+          'autoReplyApplicant', 'updatedBy', 'updatedAt'
+        ]) &&
+        isAdmin();
+      allow delete: if false;
+    }
+  }
+}

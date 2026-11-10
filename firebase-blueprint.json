@@ -1,0 +1,373 @@
+{
+  "entities": {
+    "Vacancy": {
+      "title": "Vacancy",
+      "description": "An open or closed job vacancy at Mars Infratechniek B.V.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Job title of the vacancy",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "department": {
+          "type": "string",
+          "description": "Department or discipline (e.g., Kabels & Leidingen, Grondwerk)",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "location": {
+          "type": "string",
+          "description": "Work region or base location",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "employmentType": {
+          "type": "string",
+          "description": "Contract hours and type",
+          "enum": [
+            "Fulltime (40 uur)",
+            "Parttime (32-40 uur)",
+            "BBL / Leerwerktraject",
+            "ZZP / Projectbasis"
+          ],
+          "maxLength": 60
+        },
+        "level": {
+          "type": "string",
+          "description": "Experience or education level",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "salaryRange": {
+          "type": "string",
+          "description": "Monthly salary indication",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "summary": {
+          "type": "string",
+          "description": "Short teaser summary for vacancy listing",
+          "minLength": 10,
+          "maxLength": 400
+        },
+        "description": {
+          "type": "string",
+          "description": "Full role description",
+          "minLength": 10,
+          "maxLength": 3000
+        },
+        "requirements": {
+          "type": "string",
+          "description": "Newline-separated list of job requirements",
+          "minLength": 5,
+          "maxLength": 1500
+        },
+        "benefits": {
+          "type": "string",
+          "description": "Newline-separated list of employment benefits",
+          "minLength": 5,
+          "maxLength": 1500
+        },
+        "status": {
+          "type": "string",
+          "description": "Publication status of the vacancy",
+          "enum": ["open", "closed"],
+          "maxLength": 20
+        },
+        "authorId": {
+          "type": "string",
+          "description": "UID of the administrator who created the vacancy",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update"
+        }
+      },
+      "required": [
+        "title",
+        "department",
+        "location",
+        "employmentType",
+        "level",
+        "salaryRange",
+        "summary",
+        "description",
+        "requirements",
+        "benefits",
+        "status",
+        "authorId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "JobApplication": {
+      "title": "JobApplication",
+      "description": "A candidate application with uploaded CV submitted on the website",
+      "type": "object",
+      "properties": {
+        "vacancyId": {
+          "type": "string",
+          "description": "Target vacancy ID or 'open-sollicitatie'",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "vacancyTitle": {
+          "type": "string",
+          "description": "Title of the vacancy applied for",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "applicantName": {
+          "type": "string",
+          "description": "Full name of the candidate",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "applicantEmail": {
+          "type": "string",
+          "description": "Email address of the candidate",
+          "minLength": 5,
+          "maxLength": 160
+        },
+        "applicantPhone": {
+          "type": "string",
+          "description": "Phone number of the candidate",
+          "minLength": 6,
+          "maxLength": 40
+        },
+        "motivation": {
+          "type": "string",
+          "description": "Short motivation or note from candidate",
+          "minLength": 5,
+          "maxLength": 3000
+        },
+        "cvFileName": {
+          "type": "string",
+          "description": "Uploaded CV filename",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "cvMimeType": {
+          "type": "string",
+          "description": "MIME type of the uploaded CV",
+          "minLength": 3,
+          "maxLength": 100
+        },
+        "cvDataUrl": {
+          "type": "string",
+          "description": "Base64 data URL of the uploaded CV document",
+          "minLength": 5,
+          "maxLength": 750000
+        },
+        "emailDispatched": {
+          "type": "string",
+          "description": "Status of direct email notification",
+          "enum": ["sent", "queued", "failed"],
+          "maxLength": 20
+        },
+        "status": {
+          "type": "string",
+          "description": "Review status in admin portal",
+          "enum": ["new", "reviewed", "invited", "archived"],
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of submission"
+        }
+      },
+      "required": [
+        "vacancyId",
+        "vacancyTitle",
+        "applicantName",
+        "applicantEmail",
+        "applicantPhone",
+        "motivation",
+        "cvFileName",
+        "cvMimeType",
+        "cvDataUrl",
+        "emailDispatched",
+        "status",
+        "createdAt"
+      ]
+    },
+    "ContactInquiry": {
+      "title": "ContactInquiry",
+      "description": "A contact form inquiry or project quote request submitted by a visitor",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the sender",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "company": {
+          "type": "string",
+          "description": "Optional company or municipality name",
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "description": "Sender email address",
+          "minLength": 5,
+          "maxLength": 160
+        },
+        "phone": {
+          "type": "string",
+          "description": "Sender phone number",
+          "minLength": 6,
+          "maxLength": 40
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject or service category",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed project description or inquiry",
+          "minLength": 10,
+          "maxLength": 3000
+        },
+        "emailDispatched": {
+          "type": "string",
+          "description": "Status of direct email notification",
+          "enum": ["sent", "queued", "failed"],
+          "maxLength": 20
+        },
+        "status": {
+          "type": "string",
+          "description": "Handling status in admin portal",
+          "enum": ["new", "handled"],
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of submission"
+        }
+      },
+      "required": [
+        "name",
+        "company",
+        "email",
+        "phone",
+        "subject",
+        "message",
+        "emailDispatched",
+        "status",
+        "createdAt"
+      ]
+    },
+    "MailConfig": {
+      "title": "MailConfig",
+      "description": "Admin email forwarding and SMTP configuration",
+      "type": "object",
+      "properties": {
+        "recipientEmail": {
+          "type": "string",
+          "description": "Primary email address receiving contact inquiries and job applications",
+          "minLength": 5,
+          "maxLength": 160
+        },
+        "ccEmail": {
+          "type": "string",
+          "description": "Optional CC email address",
+          "maxLength": 160
+        },
+        "senderName": {
+          "type": "string",
+          "description": "Display name used for outgoing notification emails",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "smtpHost": {
+          "type": "string",
+          "description": "Optional custom SMTP server hostname",
+          "maxLength": 160
+        },
+        "smtpPort": {
+          "type": "number",
+          "description": "SMTP port (e.g., 587 or 465)"
+        },
+        "smtpUser": {
+          "type": "string",
+          "description": "SMTP username",
+          "maxLength": 160
+        },
+        "smtpPass": {
+          "type": "string",
+          "description": "SMTP password or app key",
+          "maxLength": 200
+        },
+        "forwardContacts": {
+          "type": "boolean",
+          "description": "Whether to immediately email contact form inquiries"
+        },
+        "forwardApplications": {
+          "type": "boolean",
+          "description": "Whether to immediately email job applications and CVs"
+        },
+        "autoReplyApplicant": {
+          "type": "boolean",
+          "description": "Whether to send an automatic confirmation receipt to the applicant"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "UID of the administrator who last updated mail settings",
+          "maxLength": 128
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last configuration update"
+        }
+      },
+      "required": [
+        "recipientEmail",
+        "ccEmail",
+        "senderName",
+        "smtpHost",
+        "smtpPort",
+        "smtpUser",
+        "smtpPass",
+        "forwardContacts",
+        "forwardApplications",
+        "autoReplyApplicant",
+        "updatedBy",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/vacancies/{vacancyId}": {
+      "schema": { "$ref": "#/entities/Vacancy" },
+      "description": "Collection of job vacancies managed by administrators and publicly readable when open"
+    },
+    "/applications/{applicationId}": {
+      "schema": { "$ref": "#/entities/JobApplication" },
+      "description": "Job applications with CV attachments submitted by candidates and readable only by administrators"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/ContactInquiry" },
+      "description": "Contact form inquiries submitted by visitors and readable only by administrators"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/MailConfig" },
+      "description": "Administrator mail forwarding configuration document (settingId == 'mailConfig')"
+    }
+  }
+}

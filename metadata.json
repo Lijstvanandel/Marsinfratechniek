@@ -1,0 +1,8 @@
+{
+  "name": "Mars Infratechniek B.V.",
+  "description": "Specialisten in grondwerk, wegenbouw, kabels & leidingen en riolering. Bekijk onze projecten, diensten en openstaande vacatures.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
