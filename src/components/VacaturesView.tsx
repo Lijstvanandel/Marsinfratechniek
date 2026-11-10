@@ -209,8 +209,8 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
       </section>
 
       {/* Main Content: Vacancies List + Direct Application with CV Upload */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-[1280px] mx-auto px-6">
+      <section className="py-10 sm:py-12 lg:py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
           {/* Department Filter Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-neutral-200">
             <div className="text-sm font-semibold text-neutral-900">
@@ -407,7 +407,7 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
                       id="apply-vacancy"
                       value={selectedVacancyId}
                       onChange={(e) => setSelectedVacancyId(e.target.value)}
-                      className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 bg-white focus:border-[#EA580C] focus:outline-none"
+                      className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 bg-white focus:border-[#EA580C] focus:outline-none"
                     >
                       {openVacancies.map((v) => (
                         <option key={v.id} value={v.id}>
@@ -433,7 +433,7 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
                       value={applicantName}
                       onChange={(e) => setApplicantName(e.target.value)}
                       placeholder="Voor- en achternaam"
-                      className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                      className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                     />
                     {errors.applicantName && (
                       <p className="text-xs text-red-600 mt-1">{errors.applicantName}</p>
@@ -454,7 +454,7 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
                         value={applicantEmail}
                         onChange={(e) => setApplicantEmail(e.target.value)}
                         placeholder="naam@email.nl"
-                        className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                        className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                       />
                       {errors.applicantEmail && (
                         <p className="text-xs text-red-600 mt-1">{errors.applicantEmail}</p>
@@ -474,7 +474,7 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
                         value={applicantPhone}
                         onChange={(e) => setApplicantPhone(e.target.value)}
                         placeholder="06 - 1234 5678"
-                        className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                        className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                       />
                       {errors.applicantPhone && (
                         <p className="text-xs text-red-600 mt-1">{errors.applicantPhone}</p>
@@ -571,7 +571,7 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
                       value={motivation}
                       onChange={(e) => setMotivation(e.target.value)}
                       placeholder="Vertel kort welke ervaring u heeft of wanneer u beschikbaar bent..."
-                      className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                      className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                     />
                     {errors.motivation && (
                       <p className="text-xs text-red-600 mt-1">{errors.motivation}</p>
@@ -581,7 +581,7 @@ export const VacaturesView: React.FC<VacaturesViewProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 text-sm font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] disabled:opacity-60 transition-colors cursor-pointer"
+                    className="w-full py-3.5 px-6 text-sm font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] disabled:opacity-60 transition-colors min-h-[48px] inline-flex items-center justify-center cursor-pointer"
                   >
                     {isSubmitting
                       ? 'Sollicitatie & CV versturen...'

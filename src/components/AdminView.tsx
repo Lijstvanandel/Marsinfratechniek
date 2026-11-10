@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CheckCircle2,
   Download,
@@ -109,6 +109,10 @@ export const AdminView: React.FC<AdminViewProps> = ({
   const [cfgErrors, setCfgErrors] = useState<Record<string, string>>({});
   const [cfgSavedMessage, setCfgSavedMessage] = useState('');
   const [isSendingTest, setIsSendingTest] = useState(false);
+
+  useEffect(() => {
+    setCfgState(mailConfig);
+  }, [mailConfig]);
 
   const handleCredentialsLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -345,37 +349,37 @@ export const AdminView: React.FC<AdminViewProps> = ({
 
       {/* Admin Sub-Navigation */}
       <div className="bg-white border-b border-neutral-200">
-        <div className="max-w-[1280px] mx-auto px-6 flex items-center gap-2 overflow-x-auto py-3">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 flex items-center gap-2 overflow-x-auto py-2.5">
           <button
             type="button"
             onClick={() => setActiveSection('vacatures')}
-            className={`px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`min-h-[40px] px-3.5 sm:px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
               activeSection === 'vacatures'
                 ? 'bg-neutral-950 text-white'
                 : 'text-neutral-700 hover:bg-neutral-100'
             }`}
           >
             <FileText className="w-3.5 h-3.5" />
-            Vacatures Beheren ({vacancies.length})
+            Vacatures ({vacancies.length})
           </button>
 
           <button
             type="button"
             onClick={() => setActiveSection('sollicitaties')}
-            className={`px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`min-h-[40px] px-3.5 sm:px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
               activeSection === 'sollicitaties'
                 ? 'bg-neutral-950 text-white'
                 : 'text-neutral-700 hover:bg-neutral-100'
             }`}
           >
             <Users className="w-3.5 h-3.5" />
-            Sollicitaties & CV’s ({applications.length})
+            Sollicitaties &amp; CV’s ({applications.length})
           </button>
 
           <button
             type="button"
             onClick={() => setActiveSection('contactaanvragen')}
-            className={`px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`min-h-[40px] px-3.5 sm:px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
               activeSection === 'contactaanvragen'
                 ? 'bg-neutral-950 text-white'
                 : 'text-neutral-700 hover:bg-neutral-100'
@@ -388,20 +392,20 @@ export const AdminView: React.FC<AdminViewProps> = ({
           <button
             type="button"
             onClick={() => setActiveSection('mailconfig')}
-            className={`px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`min-h-[40px] px-3.5 sm:px-4 py-2 text-xs font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
               activeSection === 'mailconfig'
                 ? 'bg-[#EA580C] text-white'
                 : 'text-neutral-700 hover:bg-neutral-100'
             }`}
           >
             <Settings className="w-3.5 h-3.5" />
-            Mailconfiguratie ({mailConfig.recipientEmail})
+            Website &amp; Mail
           </button>
         </div>
       </div>
 
       {/* Main Workspace */}
-      <div className="max-w-[1280px] mx-auto px-6 py-10">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 md:py-10">
         {/* TAB 1: VACATURES BEHEREN */}
         {activeSection === 'vacatures' && (
           <div className="space-y-8">
@@ -909,11 +913,12 @@ export const AdminView: React.FC<AdminViewProps> = ({
             <div className="lg:col-span-7 bg-white border-2 border-neutral-950 p-6 md:p-8 space-y-6">
               <div className="border-b-2 border-[#EA580C] pb-4 space-y-1">
                 <h2 className="font-display text-xl font-bold text-neutral-950">
-                  E-mail Doorsturing & SMTP Configuratie
+                  Website-instellingen & E-mail Doorsturing
                 </h2>
                 <p className="text-xs text-neutral-600">
-                  Stel in naar welk e-mailadres contactformulieraanvragen en sollicitaties
-                  (inclusief CV-bijlage) direct worden doorgestuurd.
+                  Beheer hier de zichtbaarheid van websitemodules (zoals het Projecten-blok) en
+                  stel in naar welk e-mailadres contactformulieraanvragen en sollicitaties (inclusief CV)
+                  worden doorgestuurd.
                 </p>
               </div>
 
@@ -995,6 +1000,48 @@ export const AdminView: React.FC<AdminViewProps> = ({
                   {cfgErrors.senderName && (
                     <p className="text-xs text-red-600 mt-1">{cfgErrors.senderName}</p>
                   )}
+                </div>
+
+                {/* Website Weergave Instellingen */}
+                <div className="p-4 bg-neutral-50 border-2 border-neutral-900 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-200 pb-2">
+                    <div>
+                      <div className="font-display text-sm font-bold text-neutral-950">
+                        Zichtbaarheid 'Projecten' Sectie
+                      </div>
+                      <p className="text-xs text-neutral-600">
+                        Schakel het complete projectenblok op de homepage en in de menubalk in of uit.
+                      </p>
+                    </div>
+                    <span
+                      className={`text-xs px-2.5 py-1 font-mono-tabular font-bold self-start sm:self-auto ${
+                        cfgState.showProjects
+                          ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                          : 'bg-neutral-200 text-neutral-700 border border-neutral-300'
+                      }`}
+                    >
+                      {cfgState.showProjects ? 'ACTIEF / ZICHTBAAR' : 'UITGESCHAKELD (VERBORGEN)'}
+                    </span>
+                  </div>
+
+                  <label className="flex items-start gap-3 text-xs text-neutral-800 cursor-pointer pt-1">
+                    <input
+                      type="checkbox"
+                      checked={Boolean(cfgState.showProjects)}
+                      onChange={(e) =>
+                        setCfgState({ ...cfgState, showProjects: e.target.checked })
+                      }
+                      className="mt-0.5 w-4 h-4 accent-[#EA580C]"
+                    />
+                    <div>
+                      <span className="font-semibold text-neutral-950 block">
+                        Toon het blok 'Projecten' op de homepage en in navigatie
+                      </span>
+                      <span className="text-neutral-500 block text-[11px] mt-0.5">
+                        Wanneer uitgevinkt is de volledige projectensectie en de navigatielink verborgen voor bezoekers. Vink aan en sla op om projecten direct zichtbaar te maken.
+                      </span>
+                    </div>
+                  </label>
                 </div>
 
                 {/* Forwarding Toggles */}
@@ -1172,7 +1219,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
                     type="submit"
                     className="px-6 py-2.5 text-xs font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] cursor-pointer"
                   >
-                    Mailconfiguratie Opslaan
+                    Instellingen Opslaan (Website & Mail)
                   </button>
                 </div>
               </form>

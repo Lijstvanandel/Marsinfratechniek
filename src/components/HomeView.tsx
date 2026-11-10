@@ -109,22 +109,22 @@ export const HomeView: React.FC<HomeViewProps> = ({
     <div>
       {/* 1. HERO SECTION — High-Impact Project Photography & Direct Contact */}
       <section className="relative bg-neutral-950 text-white overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 py-12 lg:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
             {/* Left Column: Value Proposition & Direct Contact Coordinates */}
-            <div className="lg:col-span-6 flex flex-col justify-between space-y-8">
-              <div className="space-y-5">
-                <div className="text-xs font-mono-tabular text-neutral-400">
+            <div className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8">
+              <div className="space-y-4 sm:space-y-5">
+                <div className="text-xs font-mono-tabular text-neutral-400 flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span>Regio Dalfsen, Zwolle & Overijssel</span>
-                  <span className="mx-2" aria-hidden="true">·</span>
+                  <span className="text-[#EA580C]" aria-hidden="true">·</span>
                   <span>{COMPANY_INFO.certification}</span>
                 </div>
 
-                <div className="border-y-2 border-[#EA580C] py-3">
+                <div className="border-y-2 border-[#EA580C] py-2.5 sm:py-3">
                   <h1
-                    className="font-display font-bold tracking-tight text-white leading-[1.08]"
+                    className="font-display font-bold tracking-tight text-white leading-[1.1]"
                     style={{
-                      fontSize: 'clamp(2.25rem, 3.8vw, 3.5rem)',
+                      fontSize: 'clamp(1.85rem, 3.8vw, 3.5rem)',
                       textWrap: 'balance',
                     }}
                   >
@@ -132,7 +132,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </h1>
                 </div>
 
-                <p className="text-base md:text-lg text-neutral-300 leading-relaxed max-w-xl">
+                <p className="text-sm sm:text-base md:text-lg text-neutral-300 leading-relaxed max-w-xl">
                   Mars Infratechniek B.V. realiseert civieltechnische projecten voor
                   gemeenten, netbeheerders, bouwbedrijven en industrie. Korte lijnen,
                   eigen modern materieel en afspraak is afspraak.
@@ -140,13 +140,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
 
               {/* Direct Contact Bar inspired directly by the logo */}
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-neutral-900 border border-neutral-800">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 p-3.5 sm:p-4 bg-neutral-900 border border-neutral-800">
                   <div>
                     <div className="text-xs text-neutral-400">Direct telefonisch overleg</div>
                     <a
                       href={COMPANY_INFO.phoneHref}
-                      className="mt-1 inline-flex items-center gap-2 font-mono-tabular text-lg font-bold text-white hover:text-[#EA580C] transition-colors"
+                      className="mt-1 inline-flex items-center gap-2 font-mono-tabular text-base sm:text-lg font-bold text-white hover:text-[#EA580C] transition-colors min-h-[38px]"
                     >
                       <Phone className="w-4 h-4 text-[#EA580C]" />
                       {COMPANY_INFO.phone}
@@ -156,7 +156,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <div className="text-xs text-neutral-400">Bestek of offerteaanvraag</div>
                     <a
                       href={COMPANY_INFO.emailHref}
-                      className="mt-1 inline-flex items-center gap-2 font-mono-tabular text-sm font-semibold text-white hover:text-[#EA580C] transition-colors break-all"
+                      className="mt-1 inline-flex items-center gap-2 font-mono-tabular text-xs sm:text-sm font-semibold text-white hover:text-[#EA580C] transition-colors break-all min-h-[38px]"
                     >
                       <Mail className="w-4 h-4 text-[#EA580C] shrink-0" />
                       {COMPANY_INFO.email}
@@ -164,14 +164,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                   <button
                     type="button"
                     onClick={() => {
                       const el = document.getElementById('contact');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="px-6 py-3.5 text-sm font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] transition-colors inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-3.5 text-sm font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap min-h-[44px] cursor-pointer"
                   >
                     Project of Offerte Bespreken
                     <ArrowRight className="w-4 h-4" />
@@ -179,7 +179,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <button
                     type="button"
                     onClick={() => onNavigate('vacatures')}
-                    className="px-5 py-3.5 text-sm font-semibold text-neutral-200 border border-neutral-700 hover:border-white hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                    className="w-full sm:w-auto px-5 py-3.5 text-sm font-semibold text-neutral-200 border border-neutral-700 hover:border-white hover:text-white transition-colors whitespace-nowrap min-h-[44px] inline-flex items-center justify-center cursor-pointer"
                   >
                     Bekijk Vacatures ({openVacanciesCount})
                   </button>
@@ -187,23 +187,23 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </div>
 
-            {/* Right Column: Dominant 16:9 Project Photography Carrier */}
-            <div className="lg:col-span-6 relative min-h-[340px] lg:min-h-[440px] bg-neutral-900 border border-neutral-800 overflow-hidden">
+            {/* Right Column: Dominant 16:9 Project / Equipment Carrier */}
+            <div className="lg:col-span-6 relative min-h-[260px] sm:min-h-[340px] lg:min-h-[440px] bg-neutral-900 border border-neutral-800 overflow-hidden">
               <img
                 src={COMPANY_INFO.heroImage}
-                alt="Mars Infratechniek B.V. wegenbouw en grondwerk project in uitvoering"
+                alt="Mars Infratechniek B.V. Takeuchi minikraan met machinist"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-6">
                 <div className="text-xs font-mono-tabular text-[#EA580C] font-semibold">
-                  Project in beeld · Regio Overijssel
+                  Materieel in beeld · Regio Overijssel
                 </div>
                 <div className="font-display text-lg font-bold text-white mt-0.5">
-                  Reconstructie Parallelweg & RWS-Banden Vechtdal
+                  Takeuchi Minigraver met Machinist
                 </div>
                 <div className="text-xs text-neutral-300 mt-1">
-                  3D-GPS grondverzet · Fundering · Asfalt- en betonelementen
+                  Precisie ontgravingen · Kabel- en leidingtracés · Grondwerk
                 </div>
               </div>
             </div>
@@ -212,35 +212,43 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
         {/* Full-Width 4-Column Quantitative Proof Strip Below Hero */}
         <div className="border-t border-neutral-800 bg-neutral-900/70">
-          <div className="max-w-[1280px] mx-auto px-6 py-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <div>
-              <div className="font-display text-2xl md:text-3xl font-bold text-white font-mono-tabular">
+              <div className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white font-mono-tabular">
                 100% VCA**
               </div>
               <div className="text-xs text-neutral-400 mt-1">
-                Veiligheid & CROW 500 gecertificeerd werken
+                Veiligheid &amp; CROW 500 gecertificeerd werken
               </div>
             </div>
             <div>
-              <div className="font-display text-2xl md:text-3xl font-bold text-white font-mono-tabular">
-                3D-GPS
+              <div className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white font-mono-tabular">
+                0,8 - 3,5t
               </div>
               <div className="text-xs text-neutral-400 mt-1">
-                Machinebesturing op kranen en shovels
+                Kranenverhuur inclusief vakkundige bediening
               </div>
             </div>
             <div>
-              <div className="font-display text-2xl md:text-3xl font-bold text-white font-mono-tabular">
+              <a
+                href={COMPANY_INFO.phoneHref}
+                className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white hover:text-[#EA580C] font-mono-tabular block transition-colors"
+                title="Direct bellen"
+              >
                 {COMPANY_INFO.phone}
-              </div>
+              </a>
               <div className="text-xs text-neutral-400 mt-1">
                 Eén vast aanspreekpunt van offerte tot oplevering
               </div>
             </div>
             <div>
-              <div className="font-display text-2xl md:text-3xl font-bold text-[#EA580C] font-mono-tabular">
+              <button
+                type="button"
+                onClick={() => onNavigate('vacatures')}
+                className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-[#EA580C] hover:text-[#C2410C] font-mono-tabular block text-left transition-colors cursor-pointer"
+              >
                 {openVacanciesCount} Vacatures
-              </div>
+              </button>
               <div className="text-xs text-neutral-400 mt-1">
                 Direct solliciteren met CV-upload
               </div>
@@ -249,24 +257,25 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 2. PROJECTEN SECTION */}
-      <section id="projecten" className="py-16 lg:py-20 bg-white border-b border-neutral-200">
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
-            <div className="space-y-2">
-              <div className="text-xs font-mono-tabular text-[#EA580C] font-semibold">
-                Uitgevoerd werk in beeld
+      {/* 2. PROJECTEN SECTION (Kan via beheer/admin in- of uitgeschakeld worden) */}
+      {mailConfig.showProjects && (
+        <section id="projecten" className="py-16 lg:py-20 bg-white border-b border-neutral-200">
+          <div className="max-w-[1280px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-neutral-200">
+              <div className="space-y-2">
+                <div className="text-xs font-mono-tabular text-[#EA580C] font-semibold">
+                  Uitgevoerd werk in beeld
+                </div>
+                <h2
+                  className="font-display text-2xl md:text-4xl font-bold text-neutral-950 tracking-tight"
+                  style={{ textWrap: 'balance' }}
+                >
+                  Projecten
+                </h2>
+                <p className="text-sm md:text-base text-neutral-600 max-w-2xl">
+                  Een realistisch beeld van onze dagelijkse werkzaamheden.
+                </p>
               </div>
-              <h2
-                className="font-display text-2xl md:text-4xl font-bold text-neutral-950 tracking-tight"
-                style={{ textWrap: 'balance' }}
-              >
-                Projecten
-              </h2>
-              <p className="text-sm md:text-base text-neutral-600 max-w-2xl">
-                Een realistisch beeld van onze dagelijkse werkzaamheden.
-              </p>
-            </div>
 
             {/* Interactive Filter Controls */}
             <div
@@ -348,13 +357,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
         </div>
       </section>
+      )}
 
       {/* 3. ONZE DIENSTEN SECTION (Asymmetric Editorial Numbered List) */}
-      <section id="diensten" className="py-16 lg:py-20 bg-neutral-50 border-b border-neutral-200">
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="max-w-2xl space-y-2 pb-10">
+      <section id="diensten" className="py-12 lg:py-20 bg-neutral-50 border-b border-neutral-200">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
+          <div className="max-w-2xl space-y-2 pb-8 sm:pb-10">
             <div className="text-xs font-mono-tabular text-[#EA580C] font-semibold">
-              Kernactiviteiten GWW & Ondergrondse Infra
+              Kernactiviteiten GWW &amp; Ondergrondse Infra
             </div>
             <h2
               className="font-display text-2xl md:text-4xl font-bold text-neutral-950 tracking-tight"
@@ -375,7 +385,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               return (
                 <div
                   key={service.id}
-                  className={`${spanClass} bg-white border border-neutral-200 p-6 md:p-8 flex flex-col justify-between space-y-6`}
+                  className={`${spanClass} bg-white border border-neutral-200 p-5 sm:p-6 md:p-8 flex flex-col justify-between space-y-6`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-baseline justify-between gap-4 border-b border-neutral-200 pb-3">
@@ -387,7 +397,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <div className="text-xs font-semibold text-neutral-500">
                       {service.subtitle}
                     </div>
-                    <p className="text-sm text-neutral-700 leading-relaxed">
+                    <p className="text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
                       {service.description}
                     </p>
                     <ul className="space-y-2 pt-2 text-sm text-neutral-700">
@@ -400,14 +410,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     </ul>
                   </div>
 
-                  <div className="pt-4 border-t border-neutral-100 flex items-center justify-between gap-4">
+                  <div className="pt-4 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                     <span className="text-xs font-mono-tabular text-neutral-500">
-                      Direct inzetbaar in Overijssel & Noord-NL
+                      Direct inzetbaar in Overijssel &amp; Noord-NL
                     </span>
                     <button
                       type="button"
                       onClick={() => handleSelectServiceForQuote(service.title)}
-                      className="px-4 py-2 text-xs font-semibold text-neutral-950 border border-neutral-300 hover:border-[#EA580C] hover:text-[#EA580C] transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-neutral-950 border border-neutral-300 hover:border-[#EA580C] hover:text-[#EA580C] transition-colors whitespace-nowrap min-h-[40px] inline-flex items-center justify-center cursor-pointer"
                     >
                       Offerte voor {service.title}
                     </button>
@@ -534,11 +544,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* 5. CONTACT & OFFERTE SECTION */}
-      <section id="contact" className="py-16 lg:py-20 bg-neutral-950 text-white">
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section id="contact" className="py-12 lg:py-20 bg-neutral-950 text-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
             {/* Left Column: Direct Contact Details */}
-            <div className="lg:col-span-5 space-y-8">
+            <div className="lg:col-span-5 space-y-6 sm:space-y-8">
               <div className="space-y-3">
                 <div className="text-xs font-mono-tabular text-[#EA580C] font-semibold">
                   Direct schakelen
@@ -547,7 +557,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   className="font-display text-2xl md:text-4xl font-bold text-white tracking-tight"
                   style={{ textWrap: 'balance' }}
                 >
-                  Contact & Offerteaanvraag
+                  Contact &amp; Offerteaanvraag
                 </h2>
                 <p className="text-sm text-neutral-300 leading-relaxed">
                   Heeft u een bestek, grondwerkproject of capaciteitsvraagstuk? Bel ons
@@ -560,40 +570,46 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </p>
               </div>
 
-              <div className="space-y-4 border-y-2 border-[#EA580C] py-6">
-                <div className="flex items-start gap-4">
+              <div className="space-y-4 border-y-2 border-[#EA580C] py-5 sm:py-6">
+                <div className="flex items-start gap-3.5 sm:gap-4">
                   <Phone className="w-5 h-5 text-[#EA580C] shrink-0 mt-1" />
                   <div>
-                    <div className="text-xs text-neutral-400">Telefoon (Werkdagen 07:00 – 17:30 & 24/7 storingsdienst)</div>
+                    <div className="text-xs text-neutral-400">Telefoon (Werkdagen 07:00 – 17:30 &amp; 24/7 storingsdienst)</div>
                     <a
                       href={COMPANY_INFO.phoneHref}
-                      className="font-mono-tabular text-2xl font-bold text-white hover:text-[#EA580C] transition-colors"
+                      className="font-mono-tabular text-xl sm:text-2xl font-bold text-white hover:text-[#EA580C] transition-colors min-h-[40px] flex items-center"
                     >
                       {COMPANY_INFO.phone}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3.5 sm:gap-4">
                   <Mail className="w-5 h-5 text-[#EA580C] shrink-0 mt-1" />
                   <div>
                     <div className="text-xs text-neutral-400">E-mailadres</div>
                     <a
                       href={COMPANY_INFO.emailHref}
-                      className="font-mono-tabular text-base font-semibold text-white hover:text-[#EA580C] transition-colors"
+                      className="font-mono-tabular text-sm sm:text-base font-semibold text-white hover:text-[#EA580C] transition-colors break-all min-h-[36px] flex items-center"
                     >
                       {COMPANY_INFO.email}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3.5 sm:gap-4">
                   <MapPin className="w-5 h-5 text-[#EA580C] shrink-0 mt-1" />
                   <div>
-                    <div className="text-xs text-neutral-400">Bezoek- & Materieeladres</div>
-                    <div className="text-base font-semibold text-white">
+                    <div className="text-xs text-neutral-400">Bezoek- &amp; Materieeladres</div>
+                    <a
+                      href="https://maps.google.com/?q=Marsweg+1b,+7722+MB+Dalfsen"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm sm:text-base font-semibold text-white hover:text-[#EA580C] min-h-[36px] flex items-center underline decoration-[#EA580C]/40 underline-offset-4"
+                      title="Route bekijken op Google Maps"
+                    >
                       {COMPANY_INFO.address}
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -650,7 +666,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Bijv. J. de Vries"
-                        className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                        className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                       />
                       {formErrors.name && (
                         <p className="text-xs text-red-600 mt-1">{formErrors.name}</p>
@@ -670,7 +686,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
                         placeholder="Bijv. Gemeente Dalfsen"
-                        className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                        className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                       />
                       {formErrors.company && (
                         <p className="text-xs text-red-600 mt-1">{formErrors.company}</p>
@@ -692,7 +708,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="naam@bedrijf.nl"
-                        className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                        className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                       />
                       {formErrors.email && (
                         <p className="text-xs text-red-600 mt-1">{formErrors.email}</p>
@@ -712,7 +728,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="06 - 1234 5678 of 0529 - ..."
-                        className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                        className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                       />
                       {formErrors.phone && (
                         <p className="text-xs text-red-600 mt-1">{formErrors.phone}</p>
@@ -731,12 +747,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       id="contact-subject"
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 bg-white focus:border-[#EA580C] focus:outline-none"
+                      className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 bg-white focus:border-[#EA580C] focus:outline-none"
                     >
-                      <option value="Grondwerk & Wegenbouw">Grondwerk & Wegenbouw</option>
-                      <option value="Kabels & Leidingen">Kabels & Leidingen</option>
-                      <option value="Riolering & Waterhuishouding">Riolering & Waterhuishouding</option>
-                      <option value="Bestrating & Terreinverharding">Bestrating & Terreinverharding</option>
+                      <option value="Aanleg netwerken">Aanleg netwerken (Kabels &amp; Leidingen / Glasvezel)</option>
+                      <option value="Boor en perswerk">Boor en perswerk (110mm - 400mm / Bestuurbare boring)</option>
+                      <option value="Verhuur werkmateriaal inclusief bediening">Verhuur werkmateriaal (0,8 - 3,5t kranen met machinist)</option>
+                      <option value="Grondwerk & Wegenbouw">Grondwerk &amp; Wegenbouw</option>
+                      <option value="Riolering & Waterhuishouding">Riolering &amp; Waterhuishouding</option>
                       <option value="Algemene vraag / Overig">Algemene vraag / Overig</option>
                     </select>
                     {formErrors.subject && (
@@ -757,7 +774,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Beschrijf kort de locatie, gewenste werkzaamheden en planning..."
-                      className="w-full px-3.5 py-2.5 text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
+                      className="w-full px-3.5 py-3 sm:py-2.5 text-base sm:text-sm border border-neutral-300 focus:border-[#EA580C] focus:outline-none"
                     />
                     {formErrors.message && (
                       <p className="text-xs text-red-600 mt-1">{formErrors.message}</p>
@@ -771,7 +788,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-6 py-3 text-sm font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] disabled:opacity-60 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                      className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-white bg-[#EA580C] hover:bg-[#C2410C] disabled:opacity-60 transition-colors whitespace-nowrap min-h-[48px] inline-flex items-center justify-center cursor-pointer"
                     >
                       {isSubmitting ? 'Aanvraag versturen...' : 'Aanvraag Versturen'}
                     </button>

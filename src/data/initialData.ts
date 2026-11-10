@@ -13,65 +13,54 @@ export const COMPANY_INFO = {
   certification: 'VCA** & ISO 9001 Gecertificeerd',
   logoUrl: '/assets/aistudio/image_3164f764.png',
   aboutImage: '/assets/aistudio/mars_1600208645_f11d2391.png',
-  heroImage: '/src/assets/images/hero_infra_excavation_1793890290861.jpg',
+  heroImage: '/assets/aistudio/Graafmachine-Mars-Infratechniek_e7ab9be3.jpg',
 };
 
 export const SERVICES: ServiceItem[] = [
   {
     number: '01.',
-    id: 'grondwerk-wegenbouw',
-    title: 'Grondwerk & Wegenbouw',
-    subtitle: 'Bouwrijp maken, wegfunderingen en precisie-grondverzet',
+    id: 'aanleg-netwerken',
+    title: 'Aanleg netwerken',
+    subtitle: 'Elektriciteitskabels, glasvezel, WKO en rioolbuizen',
     description:
-      'Van het ontgraven van bouwputten en cunetten tot het compleet bouw- en woonrijp maken van bedrijventerreinen en nieuwbouwlocaties. Ons machinepark is uitgerust met 3D-GPS en laserbesturing voor maximale maatvastheid.',
+      'Mars Infratechniek BV voorziet in de aanleg van allerlei vormen van netwerken, met name:\n\n• elektriciteitskabels en telecommunicatiekabels (glasvezel)\n• PE buizen voor WKO’s en als persriool\n• PVC buizen voor rioleringen\n\nBij het aanleg van netwerken wordt het nodige grondwerk verricht, denk hierbij aan het graven en verdichten van de sleuf. Tevens wordt ook het opgebroken straatwerk professioneel terug geplaatst.',
     deliverables: [
-      'Ontgraven en aanvullen van bouwputten, wegtracés en waterpartijen',
-      'Aanbrengen en verdichten van puin- en zandfunderingen onder 3D-GPS',
-      'Reconstructie van gemeentelijke wegen, fietspaden en bedrijfsterreinen',
+      'Elektriciteitskabels en telecommunicatiekabels (glasvezel)',
+      'PE buizen voor WKO’s en als persriool',
+      'PVC buizen voor rioleringen',
+      'Grondwerk, graven en verdichten van sleuven',
+      'Opgebroken straatwerk professioneel terugplaatsen',
     ],
-    image: '/src/assets/images/project_grondwerk_wegenbouw_1793890294048.jpg',
+    image: '/assets/aistudio/mars_1600208645_f11d2391.png',
   },
   {
     number: '02.',
-    id: 'kabels-leidingen',
-    title: 'Kabels & Leidingen',
-    subtitle: 'Ondergrondse energie-, water- en glasvezelinfrastructuur',
+    id: 'boor-en-perswerk',
+    title: 'Boor en perswerk',
+    subtitle: 'Sleufloze technieken en bestuurbare boringen',
     description:
-      'Gespecialiseerd in de veilige aanleg, verzwaring en sanering van ondergrondse netwerken. Wij verzorgen zowel hoofdtracés als huisaansluitingen en gestuurde boringen (HDD) voor netbeheerders en industriële opdrachtgevers.',
+      'Waar niet gegraven kan worden, biedt Mars Infratechniek de ideale oplossing. Onze organisatie kan boringen/persingen uitvoeren middels staal met diameters van 110mm tot 400mm. Desgewenst is ook een bestuurbare boring mogelijk.',
     deliverables: [
-      'Sleufaanleg en montage voor laag- en middenspanningskabels',
-      'Aanleg van waterleidingen, mantelbuizen en glasvezeltracés',
-      'Sleufloze technieken, persingen en gestuurde boringen onder wegen en watergangen',
+      'Boringen en persingen middels staal',
+      'Diameters van 110mm tot 400mm',
+      'Bestuurbare boringen mogelijk',
+      'Ideale oplossing waar niet gegraven kan worden',
     ],
     image: '/src/assets/images/project_kabels_leidingen_1793890293804.jpg',
   },
   {
     number: '03.',
-    id: 'riolering-waterhuishouding',
-    title: 'Riolering & Waterhuishouding',
-    subtitle: 'Vrijvervalriolering, HWA-stelsels en klimaatadaptieve berging',
+    id: 'verhuur-werkmateriaal',
+    title: 'Verhuur werkmateriaal inclusief bediening',
+    subtitle: 'Kranen van 0,8 t/m 3,5 ton inclusief machinist',
     description:
-      'Vakkundige vervanging en nieuw-aanleg van betonnen en kunststof rioolstelsels. Wij realiseren gescheiden hemelwaterafvoer (HWA), vuilwaterriolering (DWA), pompputten en ondergrondse infiltratievoorzieningen.',
+      'Mars Infratechniek BV verhuurt kranen van 0,8 t/m 3,5 tons inclusief machinist.',
     deliverables: [
-      'Vervanging van hoofdrioleringen in binnenstedelijk en landelijk gebied',
-      'Plaatsing van prefab betonputten, duikers, stuwen en afscheiders',
-      'Klimaatadaptieve waterberging, wadi’s en infiltratiekratten',
+      'Kranen van 0,8 t/m 3,5 ton',
+      'Altijd inclusief ervaren machinist',
+      'Flexibel inzetbaar voor al uw grond- en infrawerkzaamheden',
     ],
-    image: '/src/assets/images/project_riolering_bestrating_1793890294533.jpg',
-  },
-  {
-    number: '04.',
-    id: 'bestrating-cultuurtechniek',
-    title: 'Bestrating & Terreinverharding',
-    subtitle: 'Machinaal straatwerk, bedrijfsterreinen en openbare ruimte',
-    description:
-      'Duurzame elementenverharding voor zwaar industrieel verkeer, gemeentelijke herinrichtingen en logistieke terreinen. Onze ploegen combineren machinaal straten met ambachtelijk vakwerk.',
-    deliverables: [
-      'Machinaal aanbrengen van betonstraatstenen, H-profielstenen en gebakken klinkers',
-      'Stellen van trottoirbanden, RWS-banden, kolken en molgoten',
-      'Compleet terreinonderhoud, beschoeiingen en bermversteviging',
-    ],
-    image: '/src/assets/images/hero_infra_excavation_1793890290861.jpg',
+    image: '/assets/aistudio/Graafmachine-Mars-Infratechniek_e7ab9be3.jpg',
   },
 ];
 

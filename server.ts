@@ -14,6 +14,7 @@ interface ServerMailConfig {
   forwardContacts: boolean;
   forwardApplications: boolean;
   autoReplyApplicant: boolean;
+  showProjects: boolean;
 }
 
 interface DispatchedEmailLog {
@@ -40,6 +41,7 @@ let activeMailConfig: ServerMailConfig = {
   forwardContacts: true,
   forwardApplications: true,
   autoReplyApplicant: true,
+  showProjects: false,
 };
 
 const emailLogs: DispatchedEmailLog[] = [
@@ -169,7 +171,7 @@ async function dispatchMail(options: {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   app.use(express.json({ limit: '5mb' }));
 
@@ -193,6 +195,7 @@ async function startServer() {
       forwardContacts: Boolean(body.forwardContacts ?? true),
       forwardApplications: Boolean(body.forwardApplications ?? true),
       autoReplyApplicant: Boolean(body.autoReplyApplicant ?? true),
+      showProjects: Boolean(body.showProjects ?? false),
     };
     res.json({
       ok: true,
@@ -370,6 +373,48 @@ async function startServer() {
       ok: true,
       log: logEntry,
     });
+  });
+
+  app.get('/robots.txt', (_req, res) => {
+    res.type('text/plain');
+    res.send('User-agent: *\nAllow: /\n\nSitemap: https://marsinfra.vanandel-it.nl/sitemap.xml\n');
+  });
+
+  app.get('/sitemap.xml', (_req, res) => {
+    res.type('application/xml');
+    res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://marsinfra.vanandel-it.nl/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://marsinfra.vanandel-it.nl/#diensten</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://marsinfra.vanandel-it.nl/#over-ons</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marsinfra.vanandel-it.nl/#contact</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marsinfra.vanandel-it.nl/#vacatures</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>`);
   });
 
   if (process.env.NODE_ENV !== 'production') {

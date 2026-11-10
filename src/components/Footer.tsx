@@ -4,27 +4,32 @@ import type { ActiveTab } from './Navbar';
 
 interface FooterProps {
   openVacanciesCount: number;
+  showProjects?: boolean;
   onNavigate: (tab: ActiveTab, sectionId?: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ openVacanciesCount, onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({
+  openVacanciesCount,
+  showProjects = false,
+  onNavigate,
+}) => {
   return (
     <footer className="bg-neutral-950 text-neutral-300 border-t-2 border-[#EA580C]">
-      <div className="max-w-[1280px] mx-auto px-6 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-neutral-800">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 pb-10 sm:pb-12 border-b border-neutral-800">
           {/* Col 1: Brand lockup & direct contact */}
           <div className="md:col-span-5 space-y-4">
             <div className="inline-block border-y-2 border-[#EA580C] py-1">
-              <span className="font-display text-2xl font-bold text-white tracking-tight">
+              <span className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Mars Infratechniek B.V.
               </span>
             </div>
             <p className="text-sm text-neutral-400 max-w-md leading-relaxed">
-              No-nonsense partner voor grondwerk, wegenbouw, kabels & leidingen en
+              No-nonsense partner voor grondwerk, wegenbouw, kabels &amp; leidingen en
               riolering. Vakkundige uitvoering met modern materieel en korte lijnen.
             </p>
-            <div className="pt-2 space-y-1.5 font-mono-tabular text-sm">
-              <div>
+            <div className="pt-2 space-y-1 font-mono-tabular text-sm">
+              <div className="flex items-center gap-1.5 min-h-[36px]">
                 <span className="text-neutral-500">Tel: </span>
                 <a
                   href={COMPANY_INFO.phoneHref}
@@ -33,11 +38,11 @@ export const Footer: React.FC<FooterProps> = ({ openVacanciesCount, onNavigate }
                   {COMPANY_INFO.phone}
                 </a>
               </div>
-              <div>
+              <div className="flex items-center gap-1.5 min-h-[36px]">
                 <span className="text-neutral-500">E-mail: </span>
                 <a
                   href={COMPANY_INFO.emailHref}
-                  className="text-white font-semibold hover:text-[#EA580C] transition-colors"
+                  className="text-white font-semibold hover:text-[#EA580C] transition-colors break-all"
                 >
                   {COMPANY_INFO.email}
                 </a>
@@ -57,7 +62,7 @@ export const Footer: React.FC<FooterProps> = ({ openVacanciesCount, onNavigate }
                   onClick={() => onNavigate('home', 'diensten')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
-                  01. Grondwerk & Wegenbouw
+                  01. Aanleg netwerken
                 </button>
               </li>
               <li>
@@ -66,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ openVacanciesCount, onNavigate }
                   onClick={() => onNavigate('home', 'diensten')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
-                  02. Kabels & Leidingen
+                  02. Boor en perswerk
                 </button>
               </li>
               <li>
@@ -75,16 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ openVacanciesCount, onNavigate }
                   onClick={() => onNavigate('home', 'diensten')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
-                  03. Riolering & Waterhuishouding
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('home', 'diensten')}
-                  className="hover:text-white transition-colors text-left cursor-pointer"
-                >
-                  04. Bestrating & Terreinverharding
+                  03. Verhuur werkmateriaal inclusief bediening
                 </button>
               </li>
             </ul>
@@ -96,15 +92,17 @@ export const Footer: React.FC<FooterProps> = ({ openVacanciesCount, onNavigate }
               Direct Naar
             </h3>
             <ul className="space-y-2 text-sm text-neutral-400">
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('home', 'projecten')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Projecten
-                </button>
-              </li>
+              {showProjects && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('home', 'projecten')}
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    Projecten
+                  </button>
+                </li>
+              )}
               <li>
                 <button
                   type="button"

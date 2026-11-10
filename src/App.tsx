@@ -65,6 +65,7 @@ export default function App() {
     forwardContacts: true,
     forwardApplications: true,
     autoReplyApplicant: true,
+    showProjects: false,
   });
 
   const [emailLogs, setEmailLogs] = useState<EmailLogEntry[]>([]);
@@ -481,6 +482,7 @@ export default function App() {
           forwardContacts: Boolean(newConfig.forwardContacts),
           forwardApplications: Boolean(newConfig.forwardApplications),
           autoReplyApplicant: Boolean(newConfig.autoReplyApplicant),
+          showProjects: Boolean(newConfig.showProjects),
           updatedBy: firebaseUser.uid,
           updatedAt: serverTimestamp(),
         });
@@ -523,6 +525,7 @@ export default function App() {
       <Navbar
         activeTab={activeTab}
         openVacanciesCount={openVacanciesCount}
+        showProjects={Boolean(mailConfig.showProjects)}
         onNavigate={handleNavigate}
       />
 
@@ -568,6 +571,7 @@ export default function App() {
 
       <Footer
         openVacanciesCount={openVacanciesCount}
+        showProjects={Boolean(mailConfig.showProjects)}
         onNavigate={handleNavigate}
       />
     </div>

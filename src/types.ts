@@ -62,6 +62,7 @@ export interface MailConfig {
   forwardContacts: boolean;
   forwardApplications: boolean;
   autoReplyApplicant: boolean;
+  showProjects?: boolean;
   updatedBy?: string;
   updatedAt?: string;
 }
